@@ -15,7 +15,7 @@ on:
         default: 'build'
         type: string        
       buildDockerImage: 
-        description: Determines whether the job should build and push a Docker image
+        description: Build and push a Docker image
         required: false 
         type: boolean
         default: "true"
