@@ -24,7 +24,7 @@ jobs:
   build:
     uses: zometer/github-actions/.github/workflows/build-npm-docker.yml@main 
     with: 
-      buildDockerImage: ${{ github.event.inputs.buildDockerImage }} 
+      buildDockerImage: true # ${{ github.event.inputs.buildDockerImage }} 
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} 
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
