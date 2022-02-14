@@ -22,7 +22,7 @@ jobs:
     steps: 
       - name: Inputs 
         run: | 
-          echo "${{ github.event.inputs }}"
+          echo "${{ toJSON(github.event.inputs) }}"
       
   build:
     uses: zometer/github-actions/.github/workflows/build-npm-docker.yml@main 
