@@ -1,55 +1,38 @@
-# Workflow for building a new release, incrementing the version, and 
-# deploying the helm chart to the github chart repo. 
+# CI Build
 
-name: Sandbox
+name: CI Build
 
 on:
+  push:
+    branches: [ main, feature/**, bugfix/** ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
-    inputs:
-      gradleArgs:
-        description: 'Additional Gradle parameters'
+    inputs: 
+      npmScript: 
+        description: 'NPM script to run'
         required: false
-        default: ''
-        type: string
-      helmChartRepo: 
-        description: 'Helm Chart Repository'
-        required: true
-        default: 'zometer/helm-charts'
-        type: string
-      helmChartRepoBranch: 
-        description: 'Helm chart index branch'
-        required: true
-        default: 'gh-pages'
-        type: string
-        
+        default: 'build'
+        type: string        
+      buildDockerImage: 
+        description: Build and push a Docker image
+        required: false 
+        type: boolean
+        default: "true"
+
 jobs:
+  troubleshoot: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Inputs 
+      - run: | 
+          echo "${{ github.event.inputs }}"
+      
   build:
-    uses: zometer/github-actions/.github/workflows/build-gradle-docker-helm.yml@main 
+    uses: zometer/github-actions/.github/workflows/build-npm-docker.yml@main 
     with: 
-      gradleTasks: build 
-      gradleArgs: -Prelease.useAutomaticVersion=true ${{ github.event.inputs.gradleArgs }}
-      buildDockerImage: true
-      uploadHelmChart: true
+      buildDockerImage: ${{ github.event.inputs.buildDockerImage }} 
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} 
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
-  
-  troubleshoot:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: WTF 
-        run: | 
-          echo "${{ toJSON(needs.build) }}"
 
-  deploy-helm-chart:
-    needs: build
-    uses: zometer/github-actions/.github/workflows/push-helm-chart.yml@main
-    with: 
-      helmChartRepo: ${{ github.event.inputs.helmChartRepo }} 
-      helmChartRepoBranch: ${{ github.event.inputs.helmChartRepoBranch }}
-      artifactName: helm-chart
-      chartName: ${{ needs.build.outputs.artifact }}
-      chartVersion: ${{ needs.build.outputs.version }}      
-    secrets: 
-      githubToken: ${{ secrets.HELM_CHARTS_REPO_TOKEN }}
