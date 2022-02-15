@@ -14,11 +14,9 @@ const AllianceSearch = (props) => {
     setLoading(true);
     includeFull = (includeFull === undefined) ? false : includeFull;
     includePrivate = (includePrivate === undefined) ? false : includePrivate;
-    console.log(searchQuery, includePrivate, includeFull);
     let params = new URLSearchParams({"q": searchQuery, "includeFull": includeFull, "includePrivate": includePrivate});
     let url = new URL(searchApiUrl); 
     url.search = params.toString(); 
-    console.log("url", url);
     fetch(url)
       .then(res => res.json())
       .then(res => { 
@@ -32,7 +30,6 @@ const AllianceSearch = (props) => {
       if (input === undefined || input === null) { 
           return false; 
       }
-      console.log("input", input);
       return new Boolean(input).valueOf();
   }
 
@@ -43,9 +40,6 @@ const AllianceSearch = (props) => {
     setShouldSearch(false); 
     searchAlliances(searchParams.get("search"), includeFull, includePrivate);    
   }
-
-  console.log("search.includeFull", includeFull); 
-  console.log("search.includePrivate", includePrivate); 
 
   return (
     <>

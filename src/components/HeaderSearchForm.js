@@ -5,12 +5,8 @@ import 'App.scss';
 const HeaderSearchForm = () => { 
   const [search, setSearch] = useState();
 
-  const submitSearch = (event) => { 
-    console.log(search);
-  }
-  
   return (
-    <form className='headerSearchBar' onSubmit={submitSearch} action="/search/alliance">
+    <form className='headerSearchBar' action="/search/alliance">
       <input 
         type="text" 
         name="search" 
