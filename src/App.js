@@ -1,6 +1,7 @@
 import HeaderBar from 'components/HeaderBar';
 import SiteNav from 'components/SiteNav';
 import AllianceHome from 'pages/AllianceHome';
+import AllianceSearch from 'pages/AllianceSearch';
 import NotFound from 'pages/NotFound';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
@@ -14,6 +15,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/alliance" element={<AllianceHome/>}/>
+            <Route path="/search/">
+              <Route path="alliance" element={<AllianceSearch/>} />
+            </Route>
             <Route path="*" element={<NotFound/>}/>
           </Routes>
         </BrowserRouter>
