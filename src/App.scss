@@ -1,5 +1,5 @@
 $mainColor: #441151;
-$bodyBgColor: #F8F8F8; 
+$bodyBgColor: #F3F3F3; 
 $contentBgColor: #FFF;
 $primaryBtnColor: #35605A;
 $mainActiveColor: #D9BFD5;
@@ -26,8 +26,65 @@ input[type="text"] {
   padding-left: 1ex;
 }
 
+input[type="checkbox"] { 
+  margin-left: 2em;
+  margin-right: .75em;
+}
+
+input[type="submit"] { 
+  background-color: $primaryBtnColor;
+  color: $contentBgColor;
+  inset: none;
+  outline: none;
+}
+
 main { 
   background-color: $bodyBgColor;
+  font-size: .875rem;
+  padding-left: 20px;
+  text-align: left;
+}
+
+main > section { 
+  background-color: $contentBgColor;
+  border : solid 1px $inputBorderColor;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2em;
+  padding: 15px; 
+  max-width: 1075px;
+}
+
+table {
+  border-spacing: 0px;
+  width: 100%;
+}
+
+tr { 
+  height: 2.75rem;
+}
+
+th, td { 
+  border: none;
+  padding-left: 1ex; 
+  padding-right: 1ex; 
+}
+
+main th { 
+  border-bottom: solid 1px $inputBorderColor;
+}
+
+.allianceSearchForm fieldset { 
+  border: none;
+}
+
+.allianceSearchForm { 
+  display: grid; 
+  grid-template-columns: 3fr 1fr;
+}
+
+.allianceSearchForm .submit { 
+  text-align: right;
 }
 
 .appHeader { 
@@ -89,7 +146,14 @@ main {
   margin: 5px 1ex 0px 25px;
   width: 20px;
 }
-.siteNavLinkIcon svg { 
+
+.number { 
+  padding-right: 1ex;
+  text-align: right;
+}
+
+.row1 { 
+  background-color: $bodyBgColor;
 }
 
 .App {
