@@ -8,12 +8,8 @@ const AllianceSearchForm = ({query, privateAlliances, fullAlliances}) => {
 
   
   const handleCheckbox = (event, stateUpdater) => { 
-    console.log(event.target, event.target.checked);
     stateUpdater(event.target.checked);
   }
-
-  console.log("includePrivate", includePrivate);
-  console.log("includeFull", includeFull);
 
   return (
     <section>
@@ -37,7 +33,7 @@ const AllianceSearchForm = ({query, privateAlliances, fullAlliances}) => {
         </fieldset>
 
         <fieldset className="submit">
-          <input type="submit" value="Search Alliances"/>            
+          <input type="submit" className="btn btn-sm" value="Search Alliances"/>
         </fieldset>
       </form>
     </section>
