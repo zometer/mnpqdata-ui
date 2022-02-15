@@ -1,20 +1,15 @@
 import logo from 'images/mpqdata-logo-800.png';
-import { SearchIcon } from '@heroicons/react/outline'
-import 'App.scss';
+import HeaderSearchForm from './HeaderSearchForm';
 
-function HeaderBar() { 
+const HeaderBar = () => { 
   return (
     <header className='appHeader'>
       <div className='logo'>
         <img src={logo} alt="logo"/>
       </div>
-      <form className='headerSearchBar'>
-        <input type="text" className='headerSearchInput' placeholder='Search Alliances'/>
-        <span className='inputIcon'> 
-          <SearchIcon color='#AAA'/>
-        </span>
-      </form>
+      <HeaderSearchForm />
     </header>    
   ); 
 }
+
 export default HeaderBar;
