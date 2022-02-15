@@ -27,10 +27,7 @@ const AllianceSearch = (props) => {
   } 
 
   const resolveBoolean = (input) => { 
-      if (input === undefined || input === null) { 
-          return false; 
-      }
-      return new Boolean(input).valueOf();
+      return input === 'true';
   }
 
   const includeFull = resolveBoolean( searchParams.get("fullAlliances") );
