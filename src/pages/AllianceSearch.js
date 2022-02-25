@@ -7,6 +7,7 @@ const AllianceSearch = (props) => {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
   const [shouldSearch, setShouldSearch] = useState( searchParams.getAll("search").length > 0 );
   const searchApiUrl = window._env.MPQDATA_API_URL + "api/rest/v3/search/alliance/";
 
@@ -18,13 +19,27 @@ const AllianceSearch = (props) => {
     let url = new URL(searchApiUrl); 
     url.search = params.toString(); 
     fetch(url)
+      .then(checkForError)
       .then(res => res.json())
       .then(res => { 
         setResults(res);
         setLoading(false);
       })
+      .catch(e => {
+        console.log("error", e);
+        setLoading(false);
+        setResults([]);
+        setError(e.message);
+      })
     ;
   } 
+
+  const checkForError = (res) => { 
+    if (res.ok) {
+      return res;
+    }
+    throw Error("Error querying alliances.")
+  }
 
   const resolveBoolean = (input) => { 
       return input === 'true';
@@ -42,7 +57,7 @@ const AllianceSearch = (props) => {
     <>
       <h1>Alliance Search</h1>
       <AllianceSearchForm query={searchParams.getAll("search")} fullAlliances={includeFull} privateAlliances={includePrivate}/>
-      <AllianceSearchResults results={results} loading={loading}/>
+      <AllianceSearchResults results={results} loading={loading} error={error}/>
     </>
   );
 }

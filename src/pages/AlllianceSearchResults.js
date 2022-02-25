@@ -1,7 +1,7 @@
 import { ScaleLoader } from "react-spinners";
 import variables from 'App.scss'
 
-const AllianceSearchResults = ({results, loading}) => { 
+const AllianceSearchResults = ({results, loading, error}) => { 
 
   if (loading) { 
       return ( 
@@ -9,6 +9,14 @@ const AllianceSearchResults = ({results, loading}) => {
           <ScaleLoader color={variables.spinnerColor} loading={loading} />
         </section>
       );
+  }
+
+  if (error) { 
+    return (
+      <section className="content"> 
+        <div class="alert alert-danger" role="alert"> {error} </div>
+      </section>
+    )
   }
 
   if (results.length === 0) { 
