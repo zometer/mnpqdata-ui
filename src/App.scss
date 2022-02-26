@@ -6,6 +6,8 @@ $mainActiveColor: #D9BFD5;
 $inputBorderColor: #AAA;
 $spinnerColor: #8E22A8;
 
+@import "css/cover-search";
+
 :export { 
   mainColor: $mainColor;
   spinnerColor: $spinnerColor;
@@ -169,6 +171,14 @@ main th {
 
 .row1 { 
   background-color: $bodyBgColor;
+}
+
+.coverCard { 
+  border-radius: 25px;
+  display: inline-block;
+  margin-right: 1ex; 
+  margin-bottom: 1em;
+  width: 225px;
 }
 
 .App {
