@@ -1,7 +1,7 @@
 import AllianceSearchForm from "components/AllianceSearchForm";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import AllianceSearchResults from "./AlllianceSearchResults";
+import AllianceSearchResults from "components/AlllianceSearchResults";
 
 const AllianceSearch = (props) => { 
   const [searchParams] = useSearchParams();
