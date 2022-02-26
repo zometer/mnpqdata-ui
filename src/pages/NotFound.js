@@ -2,7 +2,11 @@
 
 function NotFound() { 
   return (
-    <p>Error: Could not find page</p>
+    <main>
+      <section className="content">
+        <p>Error: Could not find page</p>
+      </section>      
+    </main>
   );
 }
 export default NotFound;

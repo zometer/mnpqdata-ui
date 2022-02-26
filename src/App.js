@@ -14,20 +14,18 @@ function App() {
     <div className="App">
       <HeaderBar />
       <SiteNav />
-      <main>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/admin/covers/unprocessed" element={<UnprocessedCovers />} />
-            <Route path="/admin/covers/:coverId/images" element={<CoverImageSearch />} />
-            <Route path="/alliance/" element={<AllianceHome />} />
-            <Route path="/alliance/:name" element={<AllianceMemebers />} />
-            <Route path="/search/">
-              <Route path="alliance" element={<AllianceSearch />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/admin/covers/unprocessed" element={<UnprocessedCovers />} />
+          <Route path="/admin/covers/:coverId/images" element={<CoverImageSearch />} />
+          <Route path="/alliance/" element={<AllianceHome />} />
+          <Route path="/alliance/:name" element={<AllianceMemebers />} />
+          <Route path="/search/">
+            <Route path="alliance" element={<AllianceSearch />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

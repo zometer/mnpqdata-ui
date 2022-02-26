@@ -54,11 +54,11 @@ const AllianceSearch = (props) => {
   }
 
   return (
-    <>
+    <main>
       <h1>Alliance Search</h1>
       <AllianceSearchForm query={searchParams.getAll("search")} fullAlliances={includeFull} privateAlliances={includePrivate}/>
       <AllianceSearchResults results={results} loading={loading} error={error}/>
-    </>
+    </main>
   );
 }
 export default AllianceSearch;

@@ -41,7 +41,7 @@ const AllianceMemebers = () => {
   }
 
   return (
-    <>
+    <main>
       <h1>Alliance: {name}</h1>
       <section className="content">
         <table className="table table-striped">
@@ -67,7 +67,7 @@ const AllianceMemebers = () => {
           </tbody>
         </table>
       </section>
-    </>
+    </main>
   );  
 }
 export default AllianceMemebers;

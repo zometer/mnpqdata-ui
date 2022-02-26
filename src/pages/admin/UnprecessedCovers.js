@@ -56,7 +56,7 @@ function UnprocessedCovers() {
   }
 
   return (
-    <>
+    <main>
       <h1>Unprocessed Covers</h1>
 
       <section className="content">
@@ -91,7 +91,7 @@ function UnprocessedCovers() {
           </tbody>
         </table>
       </section>
-    </>
+    </main>
   )
 }
 export default UnprocessedCovers;

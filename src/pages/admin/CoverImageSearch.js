@@ -126,7 +126,7 @@ function CoverImageSearch() {
   }
 
   return (
-    <>
+    <main>
       <h1>Select Cover Image: {cover.mpqCharacterId}</h1>
 
       <section>
@@ -202,7 +202,7 @@ function CoverImageSearch() {
         )}
       </section>
     }
-    </>
+    </main>
   )
 }
 
