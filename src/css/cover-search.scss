@@ -1,0 +1,27 @@
+.coverImageSearchForm input { 
+  display: inline-block;
+}
+
+fieldset.issueFields input#seriesName { 
+  width: 55%;
+}
+
+fieldset.issueFields input#seriesYear, 
+fieldset.issueFields input#issue 
+{ 
+  margin-left: 5ex;
+  width: 12ex;
+}
+
+fieldset.issueIdFields { 
+  display: grid;
+  grid-template-columns: 20ex auto;
+  margin: 1.5em auto;
+}
+
+fieldset.issueIdFields input#issueId { 
+  height: 100%;
+  margin-left: 1ex;
+  width: 20ex;
+}
+

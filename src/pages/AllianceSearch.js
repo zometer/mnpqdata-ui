@@ -1,7 +1,7 @@
 import AllianceSearchForm from "components/AllianceSearchForm";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import AllianceSearchResults from "./AlllianceSearchResults";
+import AllianceSearchResults from "components/AlllianceSearchResults";
 
 const AllianceSearch = (props) => { 
   const [searchParams] = useSearchParams();
@@ -54,11 +54,11 @@ const AllianceSearch = (props) => {
   }
 
   return (
-    <>
+    <main>
       <h1>Alliance Search</h1>
       <AllianceSearchForm query={searchParams.getAll("search")} fullAlliances={includeFull} privateAlliances={includePrivate}/>
       <AllianceSearchResults results={results} loading={loading} error={error}/>
-    </>
+    </main>
   );
 }
 export default AllianceSearch;
