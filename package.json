@@ -1,6 +1,6 @@
 {
   "name": "mpqdata-ui",
-  "version": "0.1.0-dev",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.5",
