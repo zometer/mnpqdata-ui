@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { replaceBreadcrumbs } from "state/slices/uiSlice";
 import AllianceSearchForm from "components/AllianceSearchForm";
 import AllianceSearchResults from "components/AlllianceSearchResults";
 import { ALLIANCE_SEARCH, HOME } from "utils/BreadcrumbEntry";
-
-let breadcrumbs = [];
 
 const AllianceSearch = (props) => { 
   const [searchParams] = useSearchParams();
