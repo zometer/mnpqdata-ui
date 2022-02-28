@@ -7,7 +7,7 @@ function SiteNav() {
     <nav className='siteNav'>
       <SiteNavLink href="/dashboard" text="Dashboard" icon={ChartBarIcon}/>
       <SiteNavLink href="/roster" text="Roster" icon={UserIcon}/>
-      <SiteNavLink href="/alliance" text="Alliance" icon={UserGroupIcon}/>
+      <SiteNavLink href="/search/alliance" text="Alliance" icon={UserGroupIcon}/>
       <SiteNavLink href="/events" text="Events" icon={CalendarIcon}/>
     </nav>
   );
