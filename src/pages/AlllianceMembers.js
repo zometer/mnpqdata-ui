@@ -30,7 +30,7 @@ const AllianceMemebers = () => {
 
   useEffect( () => {
     dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH, allianceBreadcrumb(name, "")]));
-  }, []);
+  }, [dispatch, name]);
 
   if (lookupName === undefined || lookupName === null) { 
     lookupAlliance();

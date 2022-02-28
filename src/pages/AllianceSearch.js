@@ -17,7 +17,7 @@ const AllianceSearch = (props) => {
   const dispatch = useDispatch();
   useEffect( () => {
     dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH]));
-  }, []);
+  }, [dispatch]);
 
   const searchAlliances = (searchQuery, includeFull, includePrivate) => { 
     setLoading(true);
