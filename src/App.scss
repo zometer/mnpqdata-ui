@@ -6,6 +6,8 @@ $mainActiveColor: #D9BFD5;
 $inputBorderColor: #AAA;
 $spinnerColor: #8E22A8;
 
+$mainLeftPadding: 20px;
+
 @import "css/cover-search";
 
 :export { 
@@ -53,7 +55,7 @@ input[type="submit"]:hover {
 main { 
   background-color: $bodyBgColor;
   font-size: .875rem;
-  padding: 30px 0px 0px 20px;
+  padding: 1em 0px 0px $mainLeftPadding;
   text-align: left;
 }
 
@@ -137,6 +139,7 @@ main th {
 
 .siteNav { 
   background-color: $mainColor;
+  grid-row: 2 / 4;
   min-height: calc(100vh - 70px); 
   text-align: left;
 }
@@ -164,6 +167,12 @@ main th {
   width: 20px;
 }
 
+.breadcrumbs { 
+  background-color: $bodyBgColor;
+  line-height: 2em; 
+  padding: .8em 0px 0px $mainLeftPadding;
+}
+
 .number { 
   padding-right: 1ex;
   text-align: right;
@@ -185,6 +194,7 @@ main th {
   text-align: center;
   display: grid; 
   grid-template-columns: 220px auto;
+  grid-template-rows: 70px 3rem auto;
 }
 
 .App-logo {

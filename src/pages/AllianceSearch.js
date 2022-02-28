@@ -1,7 +1,10 @@
-import AllianceSearchForm from "components/AllianceSearchForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { replaceBreadcrumbs } from "state/slices/uiSlice";
+import AllianceSearchForm from "components/AllianceSearchForm";
 import AllianceSearchResults from "components/AlllianceSearchResults";
+import { ALLIANCE_SEARCH, HOME } from "utils/BreadcrumbEntry";
 
 const AllianceSearch = (props) => { 
   const [searchParams] = useSearchParams();
@@ -10,6 +13,11 @@ const AllianceSearch = (props) => {
   const [error, setError] = useState();
   const [shouldSearch, setShouldSearch] = useState( searchParams.getAll("search").length > 0 );
   const searchApiUrl = window._env.MPQDATA_API_URL + "api/rest/v3/search/alliance/";
+
+  const dispatch = useDispatch();
+  useEffect( () => {
+    dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH]));
+  }, [dispatch]);
 
   const searchAlliances = (searchQuery, includeFull, includePrivate) => { 
     setLoading(true);
