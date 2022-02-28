@@ -26,8 +26,6 @@ const AllianceMemebers = () => {
     ;
   }
 
-  console.log("alliance func", alliance);
-
   useEffect( () => {
     dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH, allianceBreadcrumb(name, "")]));
   }, [dispatch, name]);
