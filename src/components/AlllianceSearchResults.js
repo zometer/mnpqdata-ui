@@ -14,7 +14,7 @@ const AllianceSearchResults = ({results, loading, error}) => {
   if (error) { 
     return (
       <section className="content"> 
-        <div class="alert alert-danger" role="alert"> {error} </div>
+        <div className="alert alert-danger" role="alert"> {error} </div>
       </section>
     )
   }
