@@ -8,6 +8,6 @@ export const ALLIANCE = BreadcrumbEntry("Alliance", "/alliance");
 export const ALLIANCE_SEARCH = BreadcrumbEntry("Alliance Search", "/search/alliance"); 
 export const ROSTER = BreadcrumbEntry("Roster", "/roster"); 
 
-export const alliance = (allianceName) => BreadcrumbEntry(allianceName, `/alliance/${allianceName}`);
-export const roster = (rosterName) => BreadcrumbEntry(rosterName, `/roster/${rosterName}`);
-export const rosterChar = (rosterName, instanceId) => BreadcrumbEntry(rosterName, `/roster/${rosterName}/${instanceId}`);
+export const allianceBreadcrumb = (allianceName) => (BreadcrumbEntry(allianceName, `/alliance/${allianceName}`));
+export const rosterBreadcrumb = (rosterName) => BreadcrumbEntry(rosterName, `/roster/${rosterName}`);
+export const rosterCharBreadcrumb = (rosterName, instanceId) => BreadcrumbEntry(rosterName, `/roster/${rosterName}/${instanceId}`);

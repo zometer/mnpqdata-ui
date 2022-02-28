@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectBreadcrumbs } from "state/slices/uiSlice";
 import { replaceBreadcrumbs } from "state/slices/uiSlice";
 import AllianceSearchForm from "components/AllianceSearchForm";
 import AllianceSearchResults from "components/AlllianceSearchResults";
@@ -19,13 +18,8 @@ const AllianceSearch = (props) => {
 
   const dispatch = useDispatch();
   useEffect( () => {
-    dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH]))    
+    dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH]));
   }, []);
-
-  useSelector( (state) => {
-    console.log("selector", state);
-    return state;
-  });
 
   const searchAlliances = (searchQuery, includeFull, includePrivate) => { 
     setLoading(true);

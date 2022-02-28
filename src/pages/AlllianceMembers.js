@@ -1,7 +1,10 @@
 import { ScaleLoader } from "react-spinners";
 import variables from 'App.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { replaceBreadcrumbs } from "state/slices/uiSlice";
+import { ALLIANCE_SEARCH, HOME, allianceBreadcrumb } from "utils/BreadcrumbEntry";
 
 const AllianceMemebers = () => { 
   const [loading, setLoading] = useState(true);
@@ -9,6 +12,7 @@ const AllianceMemebers = () => {
   const [lookupName, setLookupName] = useState();
   const {name} = useParams();
   const allianceApiUrl = window._env.MPQDATA_API_URL + "api/rest/v1/alliance/" + name;
+  const dispatch = useDispatch(); 
 
   const lookupAlliance = () => { 
     let url = new URL(allianceApiUrl); 
@@ -21,6 +25,12 @@ const AllianceMemebers = () => {
       })
     ;
   }
+
+  console.log("alliance func", alliance);
+
+  useEffect( () => {
+    dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH, allianceBreadcrumb(name, "")]));
+  }, []);
 
   if (lookupName === undefined || lookupName === null) { 
     lookupAlliance();
