@@ -11,6 +11,7 @@ import './App.scss';
 import { Provider } from 'react-redux';
 import store from 'state/store';
 import Breadcrumbs from 'components/Breadcrumbs';
+import Roster from 'pages/Roster';
 function App() {
   return (
     <Provider store={store}>
@@ -23,7 +24,8 @@ function App() {
             <Route path="/admin/covers/unprocessed" element={<UnprocessedCovers />} />
             <Route path="/admin/covers/:coverId/images" element={<CoverImageSearch />} />
             <Route path="/alliance/" element={<AllianceHome />} />
-            <Route path="/alliance/:name" element={<AllianceMemebers />} />
+            <Route path="/alliance/:name" element={<AllianceMemebers />} />            
+            <Route path="/roster/:name" element={<Roster />} />
             <Route path="/search/">
               <Route path="alliance" element={<AllianceSearch />} />
             </Route>

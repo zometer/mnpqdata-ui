@@ -9,6 +9,8 @@ $spinnerColor: #8E22A8;
 $mainLeftPadding: 20px;
 
 @import "css/cover-search";
+@import "css/roster";
+@import "css/character-colors.scss";
 
 :export { 
   mainColor: $mainColor;
