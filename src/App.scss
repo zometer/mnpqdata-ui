@@ -1,16 +1,10 @@
-$mainColor: #441151;
-$bodyBgColor: #F3F3F3; 
-$contentBgColor: #FFF;
-$primaryBtnColor: #35605A;
-$mainActiveColor: #D9BFD5;
-$inputBorderColor: #AAA;
-$spinnerColor: #8E22A8;
 
 $mainLeftPadding: 20px;
 
 @import "css/cover-search";
 @import "css/roster";
-@import "css/character-colors.scss";
+@import "css/character-colors";
+@import "css/main-colors";
 
 :export { 
   mainColor: $mainColor;
