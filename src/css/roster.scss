@@ -1,4 +1,57 @@
+@import "./main-colors";
 @import "./character-colors";
+
+.rosterFilterForm { 
+  display: grid; 
+  grid-template-columns: 3fr 2fr ;
+  
+  .filterFieldset { 
+    display: flex;
+    button { 
+      border: 1px solid $defaultBorderColor;
+    }
+    label { 
+      display: inline-block; 
+      margin: auto 0px;
+    }
+    .textFilterInput { 
+      margin: auto 1ch;
+      width: 20ch;
+    }
+    input[type="checkbox"] { 
+      margin-left: 1ch; 
+      margin-right: 1ch;
+    }
+    .rarityFilter { 
+      margin: auto 1ch auto 0px;
+      .star { 
+        color: #c49b08;
+        display: inline-block;
+        width: 15px;
+      }
+    }
+    .championFilter { 
+      margin: auto 1ch auto 0px;
+    }
+  }
+
+  .sortFieldset { 
+    display: flex;
+    justify-content: flex-end;
+    label { 
+      display: inline-block; 
+      margin: auto 1ch auto 0px;
+    }
+    select { 
+      margin: auto 1ch auto 0px;
+      width: auto;
+    }
+    .sortAscending { 
+      margin: auto 1ch auto 0px;
+      width: auto;
+    }
+  }
+}
 
 .card { 
   background-repeat: no-repeat;
