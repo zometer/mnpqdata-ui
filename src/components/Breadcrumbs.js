@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { selectBreadcrumbs } from 'state/slices/uiSlice';
 
 
 const Breadcrumbs = () => { 
