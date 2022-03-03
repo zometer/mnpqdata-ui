@@ -6,11 +6,22 @@ import { allianceBreadcrumb, HOME, rosterBreadcrumb } from "utils/BreadcrumbEntr
 import { useDispatch } from "react-redux";
 import { replaceBreadcrumbs } from "state/slices/uiSlice";
 import RosterCard from "components/RosterCard";
+import RosterFilterForm from "components/RosterFilterForm";
+import ErrorSection from "components/ErrorSection";
 
 const Roster = () => { 
+  let initialFilters = { 
+    rarities: [1,2,3,4,5], 
+    championStatuses: ["championed", "unchampioned"],
+    sortProperty: "displayLevel", 
+    sortAscending: false,
+    text:""
+  }
   let { name } = useParams();
   const [player, setPlayer] = useState({});
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState( initialFilters )
+  const [sortProperty, setSortProperty] = useState("level");
   const [error, setError] = useState("");
   const [breadcrumbs, setBreadcrumbs] = useState([HOME, rosterBreadcrumb(name)]);
 
@@ -23,7 +34,7 @@ const Roster = () => {
       .then(res => {
         setPlayer(res);
         setLoading(false);
-        setBreadcrumbs([HOME, allianceBreadcrumb(res.allianceName), rosterBreadcrumb(name)]);
+        // setBreadcrumbs([HOME, allianceBreadcrumb(res.allianceName), rosterBreadcrumb(name)]);
       })
       .catch(e => {
         console.log("error", e);
@@ -39,16 +50,41 @@ const Roster = () => {
   useEffect( () => {
     fetchPlayer();
   }, [fetchPlayer])
+  const updateRosterFilters = (filters) => { 
+    console.log("filters", filters);
+    setFilters(filters);
+  }
+
+  console.log("roster.filter", filters);
+  let characters = Object.keys(player).length === 0 ? [] : player.characters;
+  characters = characters
+    .filter( c => filters.rarities.includes(c.rarity))
+    .filter( c => filters.championStatuses.includes( c.champion ? "championed" : "unchampioned" ) )
+    .filter( c => 
+      (filters.text === undefined || filters.text.trim() === "") || 
+      (c.name.toLowerCase().indexOf(filters.text.toLowerCase()) >= 0) || 
+      (c.subtitle.toLowerCase().indexOf(filters.text.toLowerCase()) >= 0) 
+    )
+    .sort( (a,b) => 
+      filters.sortAscending ? 
+        a[filters.sortProperty] > b[filters.sortProperty] : 
+        a[filters.sortProperty] < b[filters.sortProperty]
+    )
+  ;
 
   return (
     <main>
       <h1>Roster: {name}</h1>
 
+      <RosterFilterForm filterCallback={updateRosterFilters}/>
+
       { loading && <Loading/> }
 
-      { Object.keys(player).length > 0 && 
+      { error && <ErrorSection message={error} />}
+
+      { characters.length > 0 && 
         <section className="content">
-          {player.characters.map( (character, index) => 
+          {characters.map( (character, index) => 
             <RosterCard key={index} character={character} />
           )}
         </section>
