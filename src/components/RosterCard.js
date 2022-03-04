@@ -3,7 +3,7 @@ import RarityStars from "./RarityStars";
 
 const RosterCard = ({character}) => { 
   return (
-    <div className="card" key={character.instanceId} 
+    <div className={`card ${ ! character.imageUrlMedium && "coverNotFound"}`} key={character.instanceId} 
       style={{backgroundImage: `url("${character.imageUrlMedium}")`,}}
     >
       <section className="cardCharInfo">
