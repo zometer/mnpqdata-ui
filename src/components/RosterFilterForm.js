@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { replaceRosterFilter } from "state/slices/uiSlice";
 import RarityStars from "./RarityStars";
 
-const RosterFilterForm = ({ filterCallback }) => {
+const RosterFilterForm = () => {
   const [selectedRarities, setSelectedRarities] = useState({1:true,2:true,3:true,4:true,5:true});
   const [championStatuses, setChampionStatuses] = useState({championed: true, unchampioned: true});
   const [sortProperty, setSortProperty] = useState("displayLevel"); 
   const [sortAscending, setSortAscending] = useState(false);
   const [text, setText] = useState("");
+  const dispatch = useDispatch()
 
   const rarities = [1,2,3,4,5];
 
@@ -15,17 +18,16 @@ const RosterFilterForm = ({ filterCallback }) => {
     updated[property] = value;
     stateSetter(updated);
   }
-  const runFilterCallback = () => { 
+  const runFilterCallback = useCallback( () => { 
     let selectedRarityValues = Object.keys(selectedRarities).filter( k => selectedRarities[k] ).map(k => Number(k));
     let selectedChampStatuses = Object.keys(championStatuses).filter( k => championStatuses[k] );
-    let filters = {rarities: selectedRarityValues, championStatuses: selectedChampStatuses, sortProperty, sortAscending, text};
-    console.log("filterCallback", championStatuses);
-    filterCallback(filters);
-  }
+    let newFilter = {rarities: selectedRarityValues, championStatuses: selectedChampStatuses, sortProperty, sortAscending, text};
+    dispatch(replaceRosterFilter(newFilter));
+  }, [dispatch, selectedRarities, championStatuses, sortProperty, sortAscending, text] ); 
 
   useEffect( () => {
     runFilterCallback();
-  }, [selectedRarities, championStatuses, sortProperty, sortAscending, text]);
+  }, [runFilterCallback, selectedRarities, championStatuses, sortProperty, sortAscending, text]);
 
   return (
     <section className="content rosterFilter">
