@@ -25,7 +25,7 @@ export const uiSlice = createSlice({
       return state ;
     },
     replaceAllianceName: (state, action) => { 
-      state.alliance = action.payload; 
+      state.allianceName = action.payload; 
       return state;
     },
     replaceRosterFilter: (state, action) => { 
@@ -36,4 +36,4 @@ export const uiSlice = createSlice({
 });
 
 export default uiSlice.reducer; 
-export const { replaceAlliance, replaceBreadcrumbs, replaceRosterFilter } = uiSlice.actions;
+export const { replaceAllianceName, replaceBreadcrumbs, replaceRosterFilter } = uiSlice.actions;
