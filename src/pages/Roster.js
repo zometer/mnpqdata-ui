@@ -4,7 +4,7 @@ import Loading from "components/Loading";
 import { useCallback, useEffect, useState } from "react";
 import { allianceBreadcrumb, HOME, rosterBreadcrumb } from "utils/BreadcrumbEntry";
 import { useDispatch, useSelector } from "react-redux";
-import { replaceBreadcrumbs } from "state/slices/uiSlice";
+import { replaceAllianceName, replaceBreadcrumbs } from "state/slices/uiSlice";
 import RosterCard from "components/RosterCard";
 import RosterFilterForm from "components/RosterFilterForm";
 import ErrorSection from "components/ErrorSection";
@@ -15,9 +15,9 @@ const Roster = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const filter = useSelector( (state) => state.ui.roster.filter );
+  const allianceName = useSelector( (state) => state.ui.allianceName );
+  const dispatch = useDispatch();
   const rosterApiUrl = window._env.MPQDATA_API_URL + `api/rest/v3/roster/${name}/`;
-
-  console.log("filter", filter);
 
   const fetchPlayer = useCallback (() => { 
     fetch(rosterApiUrl)
@@ -26,6 +26,7 @@ const Roster = () => {
       .then(res => {
         setPlayer(res);
         setLoading(false);
+        dispatch(replaceAllianceName(res.allianceName));
       })
       .catch(e => {
         console.log("error", e);
@@ -34,15 +35,22 @@ const Roster = () => {
         setError(e.message);
       })
     ;
-  }, [rosterApiUrl]);
+  }, [dispatch, rosterApiUrl]);
 
-  const dispatch = useDispatch();
   useEffect( () => {
     fetchPlayer();
     console.log("fetching"); 
   }, [fetchPlayer])
 
-  console.log("roster.filter", filter);
+  // Breadcrumbs
+  useEffect( () => { 
+    const breadcrumbs = (allianceName) ? 
+      [HOME, allianceBreadcrumb(allianceName), rosterBreadcrumb(name)] : 
+      [HOME, rosterBreadcrumb(name)]
+    ;
+    dispatch(replaceBreadcrumbs( breadcrumbs));
+  }, [dispatch, allianceName, name]);
+
   let characters = Object.keys(player).length === 0 ? [] : player.characters;
   characters = characters
     .filter( c => filter.rarities.includes(c.rarity))
