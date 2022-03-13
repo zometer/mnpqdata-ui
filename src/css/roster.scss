@@ -1,0 +1,161 @@
+@import "./main-colors";
+@import "./character-colors";
+
+.rosterFilterForm { 
+  display: grid; 
+  grid-template-columns: 3fr 2fr ;
+  
+  .filterFieldset { 
+    display: flex;
+    button { 
+      border: 1px solid $defaultBorderColor;
+    }
+    label { 
+      display: inline-block; 
+      margin: auto 0px;
+    }
+    .textFilterInput { 
+      margin: auto 1ch;
+      width: 20ch;
+    }
+    input[type="checkbox"] { 
+      margin-left: 1ch; 
+      margin-right: 1ch;
+    }
+    .rarityFilter { 
+      margin: auto 1ch auto 0px;
+      .star { 
+        color: #c49b08;
+        display: inline-block;
+        width: 15px;
+      }
+    }
+    .championFilter { 
+      margin: auto 1ch auto 0px;
+    }
+  }
+
+  .sortFieldset { 
+    display: flex;
+    justify-content: flex-end;
+    label { 
+      display: inline-block; 
+      margin: auto 1ch auto 0px;
+    }
+    select { 
+      margin: auto 1ch auto 0px;
+      width: auto;
+    }
+    .sortAscending { 
+      margin: auto 1ch auto 0px;
+      width: auto;
+    }
+  }
+}
+
+.card { 
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: inline-flex;  
+  flex-direction: column-reverse;
+  height: 335px;
+  margin: 8px;
+  overflow: hidden;
+  vertical-align: bottom;
+  width: 225px;
+
+  .cardCharInfo {
+    background: rgba(0, 0, 0, .7);
+    color: white;
+    display: grid;
+    grid-template-columns: 65% auto;
+    grid-template-rows: 1.5em 1.5em 1.5em;
+    grid-row: 2 / 3;
+    height: 25%;
+    div { 
+      font-weight: 500;
+    }
+    .left { 
+      padding-left: 1ex;
+    }
+    .right { 
+      padding-right: 1ex;
+      text-align: right;
+    }
+    .name { 
+      font-weight: bold;
+      height: 4ex;
+      vertical-align: middle;    
+    }
+    .abilityLevel { 
+      background-color: red;
+      display: inline-block;
+      font-weight: bold; 
+      height: 1.4em;
+      line-height: 1.25em;
+      margin: .5ex 0px 0px .3em;
+      text-align: center;
+      vertical-align: middle;
+      width: 1.3em;
+    }
+    .abilityLevel.black { 
+      background-color: $abilityBlackColor;
+      color: $abilityTextLight;
+    }
+    .abilityLevel.blue { 
+      background-color: $abilityBlueColor;
+      color: $abilityTextLight;
+    }
+    .abilityLevel.green { 
+      background-color: $abilityGreenColor;
+      color: $abilityTextLight;
+    }
+    .abilityLevel.purple { 
+      background-color: $abilityPurpleColor;
+      color: $abilityTextLight;
+    }
+    .abilityLevel.red { 
+      background-color: $abilityRedColor;
+      color: $abilityTextLight;
+    }
+    .abilityLevel.yellow { 
+      background-color: $abilityYellowColor;
+      color: $abilityTextDark;
+    }    
+    .rarity, .level { 
+      margin-top: .3em;
+    }
+    .rarity { 
+      .star { 
+        display: inline-block;
+        width: 15px;
+      }
+    }
+    .champion, .subtitle { 
+      margin-top: .5em;
+    }
+    .champion { 
+      color: $championColorLight;
+      font-size: .8em;
+      font-weight: bold;    
+    }
+    .subtitle { 
+      font-size: .8em;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.card.coverNotFound { 
+  background-color: #e3e3e3;
+}
+.coverNotFound:after {
+  content: "No Cover Image Available"; 
+  font-size: 1.5em;
+  position: absolute;
+  text-align: center;
+  top: 30%;
+  width: 100%;
+}

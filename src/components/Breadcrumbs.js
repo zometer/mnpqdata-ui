@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
-import { selectBreadcrumbs } from 'state/slices/uiSlice';
 
 
 const Breadcrumbs = () => { 
-  const items = useSelector(selectBreadcrumbs);
+  const items = useSelector((state) => state.ui.breadcrumbs);
 
   const itemElements = items ? 
       items.map( (item, index) => {

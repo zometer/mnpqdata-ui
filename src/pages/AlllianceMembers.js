@@ -3,7 +3,7 @@ import variables from 'App.scss'
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { replaceBreadcrumbs } from "state/slices/uiSlice";
+import { replaceAllianceName, replaceBreadcrumbs } from "state/slices/uiSlice";
 import { ALLIANCE_SEARCH, HOME, allianceBreadcrumb } from "utils/BreadcrumbEntry";
 
 const AllianceMemebers = () => { 
@@ -27,7 +27,8 @@ const AllianceMemebers = () => {
   }
 
   useEffect( () => {
-    dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH, allianceBreadcrumb(name, "")]));
+    dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH, allianceBreadcrumb(name)]));
+    dispatch(replaceAllianceName(name));
   }, [dispatch, name]);
 
   if (lookupName === undefined || lookupName === null) { 
