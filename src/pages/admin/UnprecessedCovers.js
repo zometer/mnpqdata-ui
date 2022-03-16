@@ -74,7 +74,7 @@ function UnprocessedCovers() {
               covers.map((cover, index) =>
                 <tr key={index}>
                   <td>
-                    <a href={"/admin/covers/" + cover.characterCoverId + "/images"}>{cover.mpqCharacterId}</a>
+                    <a href={"/admin/covers/" + cover.characterCoverId + "/images"}>{cover.mpqCharacterKey}</a>
                   </td>
                   <td>
                     <a href={"/admin/covers/" + cover.characterCoverId + "/images"}>{cover.series}</a>
