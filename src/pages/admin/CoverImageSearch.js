@@ -87,10 +87,10 @@ function CoverImageSearch() {
     newCover.complete = true;
 
     console.log("applyCoverImage", newCover);
-    const updateUrl = window._env.MPQDATA_API_URL + "api/rest/v1/covers";
+    const updateUrl = window._env.MPQDATA_API_URL + "api/rest/v1/covers/" + newCover.characterCoverId;
     fetch(updateUrl,
       {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(newCover),
         headers: {
           'Content-Type': 'application/json',

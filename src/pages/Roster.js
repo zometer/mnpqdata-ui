@@ -17,7 +17,7 @@ const Roster = () => {
   const filter = useSelector( (state) => state.ui.roster.filter );
   const allianceName = useSelector( (state) => state.ui.allianceName );
   const dispatch = useDispatch();
-  const rosterApiUrl = window._env.MPQDATA_API_URL + `api/rest/v3/roster/${name}/`;
+  const rosterApiUrl = window._env.MPQDATA_API_URL + `api/rest/v1/rosters/${name}`;
 
   const fetchPlayer = useCallback (() => { 
     fetch(rosterApiUrl)
