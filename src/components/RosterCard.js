@@ -8,7 +8,7 @@ const RosterCard = ({character}) => {
     >
       <section className="cardCharInfo">
         <div className="name left">{character.name}</div>
-        <AbilityLevels abilities={character.abilities} />
+        <AbilityLevels abilities={character.abilityLevels} />
         <RarityStars rarity={character.rarity} className="rarity left" />
         <div className="level right">Level: {character.displayLevel}</div>
         <div className="subtitle left">{character.subtitle}</div>
