@@ -1,46 +1,47 @@
 import { useParams } from "react-router-dom";
-import checkForResponseError from "utils/checkForResponseError";
-import Loading from "components/Loading";
-import { useCallback, useEffect, useState } from "react";
-import { allianceBreadcrumb, HOME, rosterBreadcrumb } from "utils/BreadcrumbEntry";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { replaceAllianceName, replaceBreadcrumbs } from "state/slices/uiSlice";
+import { gql, useQuery } from '@apollo/client';
+import { allianceBreadcrumb, HOME, rosterBreadcrumb } from "utils/BreadcrumbEntry";
+import { replaceBreadcrumbs } from "state/slices/uiSlice";
+import ErrorSection from "components/ErrorSection";
+import Loading from "components/Loading";
 import RosterCard from "components/RosterCard";
 import RosterFilterForm from "components/RosterFilterForm";
-import ErrorSection from "components/ErrorSection";
+
+const QUERY = gql`
+query playerWithRosterByName ($name: String!) {
+	player: playerByName(name: $name) { 
+		playerName
+		allianceName
+		allianceRole
+		roster { 
+			mpqCharacterKey
+			name
+			subtitle
+			rarity
+      displayLevel
+			champion
+			imageUrlMedium
+			abilityLevels { 
+				ordinalPosition
+			  color
+				level
+			}
+		}
+	}
+}  
+`;
 
 const Roster = () => { 
   let { name } = useParams();
-  const [player, setPlayer] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const filter = useSelector( (state) => state.ui.roster.filter );
   const allianceName = useSelector( (state) => state.ui.allianceName );
   const dispatch = useDispatch();
-  const rosterApiUrl = window._env.MPQDATA_API_URL + `api/rest/v1/rosters/${name}`;
 
-  const fetchPlayer = useCallback (() => { 
-    fetch(rosterApiUrl)
-      .then(checkForResponseError)
-      .then(res => res.json())
-      .then(res => {
-        setPlayer(res);
-        setLoading(false);
-        dispatch(replaceAllianceName(res.allianceName));
-      })
-      .catch(e => {
-        console.log("error", e);
-        setLoading(false);
-        setPlayer({});
-        setError(e.message);
-      })
-    ;
-  }, [dispatch, rosterApiUrl]);
-
-  useEffect( () => {
-    fetchPlayer();
-    console.log("fetching"); 
-  }, [fetchPlayer])
+  const { loading, error, data } = useQuery(QUERY, { variables: {name} });
+  const player = (data && data.player) ? data.player : {}; 
+  console.log( {loading, error, data}); 
 
   // Breadcrumbs
   useEffect( () => { 
@@ -51,7 +52,7 @@ const Roster = () => {
     dispatch(replaceBreadcrumbs( breadcrumbs));
   }, [dispatch, allianceName, name]);
 
-  let characters = Object.keys(player).length === 0 ? [] : player.characters;
+  let characters = Object.keys(player).length === 0 ? [] : player.roster;
   characters = characters
     .filter( c => filter.rarities.includes(c.rarity))
     .filter( c => filter.championStatuses.includes( c.champion ? "championed" : "unchampioned" ) )
@@ -67,6 +68,8 @@ const Roster = () => {
     )
   ;
 
+  const errMsg = data?.errors?.[0]?.message || error?.message || undefined;
+
   return (
     <main>
       <h1>Roster: {name}</h1>
@@ -75,7 +78,7 @@ const Roster = () => {
 
       { loading && <Loading/> }
 
-      { error && <ErrorSection message={error} />}
+      { errMsg && <ErrorSection message={errMsg} />}
 
       { characters.length > 0 && 
         <section className="content">
