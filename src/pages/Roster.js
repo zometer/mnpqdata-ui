@@ -16,6 +16,7 @@ query playerWithRosterByName ($name: String!) {
 		allianceName
 		allianceRole
 		roster { 
+			instanceId
 			mpqCharacterKey
 			name
 			subtitle
