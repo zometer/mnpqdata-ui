@@ -1,5 +1,6 @@
 import { ScaleLoader } from "react-spinners";
 import variables from 'App.scss'
+import { Link } from "react-router-dom";
 
 const AllianceSearchResults = ({results, loading, error}) => { 
 
@@ -40,7 +41,7 @@ const AllianceSearchResults = ({results, loading, error}) => {
             results.map((result, index) => 
               <tr className={"row" + (index % 2)} key={result.allianceName}>
                 <td>
-                  <a href={"/alliances/" + encodeURIComponent(result.allianceName)}>{result.allianceName}</a>
+                  <Link to={"/alliances/" + encodeURIComponent(result.allianceName)}>{result.allianceName}</Link>
                 </td>
                 <td>{result.allianceType}</td>
                 <td className="number" >{result.allianceSize} / {result.allianceMaxSize} </td>
