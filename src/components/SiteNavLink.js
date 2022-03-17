@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 
-function SiteNavLink(props) { 
+function SiteNavLink({href, icon, text}) { 
   return (
-    <a className="siteNavLink" href={props.href}> 
+    <Link className="siteNavLink" to={href}>
       <span className="siteNavLinkIcon">
-        {props.icon()}
+        {icon()}
       </span>
-      {props.text}
-    </a>
+      {text}
+    </Link>
   );
 }
 export default SiteNavLink;

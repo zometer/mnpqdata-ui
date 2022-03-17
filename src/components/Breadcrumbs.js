@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const Breadcrumbs = () => { 
@@ -9,7 +10,7 @@ const Breadcrumbs = () => {
         if (index === items.length - 1) { 
           return <li className="breadcrumb-item active" aria-current="page" key={index}>{item.name}</li>
         } else { 
-          return <li className="breadcrumb-item" key={index}><a href={item.href}>{item.name}</a></li>
+          return <li className="breadcrumb-item" key={index}><Link to={item.href}>{item.name}</Link></li>
         }
       })
     : (<></>);
