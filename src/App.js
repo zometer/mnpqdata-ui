@@ -12,27 +12,33 @@ import { Provider } from 'react-redux';
 import store from 'state/store';
 import Breadcrumbs from 'components/Breadcrumbs';
 import Roster from 'pages/Roster';
+import client from './graphql/apollo-client';
+import { ApolloProvider } from '@apollo/client';
+
+
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
-        <HeaderBar />
-        <SiteNav />
-        <Breadcrumbs/>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/admin/covers/unprocessed" element={<UnprocessedCovers />} />
-            <Route path="/admin/covers/:coverId/images" element={<CoverImageSearch />} />
-            <Route path="/alliance/" element={<AllianceHome />} />
-            <Route path="/alliance/:name" element={<AllianceMemebers />} />            
-            <Route path="/roster/:name" element={<Roster />} />
-            <Route path="/search/">
-              <Route path="alliance" element={<AllianceSearch />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <ApolloProvider client={client}>
+        <div className="App">
+          <HeaderBar />
+          <SiteNav />
+          <Breadcrumbs />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/admin/covers/unprocessed" element={<UnprocessedCovers />} />
+              <Route path="/admin/covers/:coverId/images" element={<CoverImageSearch />} />
+              <Route path="/alliance/" element={<AllianceHome />} />
+              <Route path="/alliance/:name" element={<AllianceMemebers />} />
+              <Route path="/roster/:name" element={<Roster />} />
+              <Route path="/search/">
+                <Route path="alliance" element={<AllianceSearch />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </ApolloProvider>
     </Provider>
   );
 }
