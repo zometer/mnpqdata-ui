@@ -66,7 +66,7 @@ const AllianceMemebers = () => {
               alliance.members.map((player, index) => 
                 <tr key={player.playerName}>
                   <td>
-                    <a href={"/roster/" + encodeURIComponent(player.playerName)}>{player.playerName}</a>
+                    <a href={"/rosters/" + encodeURIComponent(player.playerName)}>{player.playerName}</a>
                   </td>
                   <td>{player.allianceRole}</td>
                   <td className="number" > </td>

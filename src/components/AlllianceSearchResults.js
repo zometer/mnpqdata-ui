@@ -40,7 +40,7 @@ const AllianceSearchResults = ({results, loading, error}) => {
             results.map((result, index) => 
               <tr className={"row" + (index % 2)} key={result.allianceName}>
                 <td>
-                  <a href={"/alliance/" + encodeURIComponent(result.allianceName)}>{result.allianceName}</a>
+                  <a href={"/alliances/" + encodeURIComponent(result.allianceName)}>{result.allianceName}</a>
                 </td>
                 <td>{result.allianceType}</td>
                 <td className="number" >{result.allianceSize} / {result.allianceMaxSize} </td>
