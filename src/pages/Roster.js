@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gql, useQuery } from '@apollo/client';
@@ -79,12 +79,14 @@ const Roster = () => {
 
       { loading && <Loading/> }
 
-      { errMsg && <ErrorSection message={errMsg} />}
+      { errMsg && <ErrorSection message={errMsg} /> }
 
       { characters.length > 0 && 
         <section className="content">
           {characters.map( (character, index) => 
-            <RosterCard key={index} character={character} />
+            <Link key={character.instanceId} to={character.instanceId} >
+              <RosterCard character={character} />
+            </Link>
           )}
         </section>
       }
