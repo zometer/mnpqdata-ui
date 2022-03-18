@@ -1,16 +1,8 @@
 
-const AbilityLevels = ({abilities}) => { 
-  let displayAbilities = []; 
-  abilities
-    .filter( a => ! Boolean(a.abilitySet))
-    .forEach(a => {
-      displayAbilities.push(a);    
-    })
-  ;
-
+const AbilityLevels = ({abilityLevels, className}) => { 
   return (
-    <div className="abilities right"> 
-      { displayAbilities.map( (ability, index) => 
+    <div className={`abilityLevels ${className}`}> 
+      { abilityLevels.map( (ability, index) => 
         <span key={index} className={`abilityLevel ${ability.color}`}>{ability.level}</span> 
       )}
     </div>
