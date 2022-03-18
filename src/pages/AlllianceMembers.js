@@ -1,57 +1,44 @@
-import { ScaleLoader } from "react-spinners";
-import variables from 'App.scss'
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { gql, useQuery } from "@apollo/client";
 import { replaceAllianceName, replaceBreadcrumbs } from "state/slices/uiSlice";
 import { ALLIANCE_SEARCH, HOME, allianceBreadcrumb } from "utils/BreadcrumbEntry";
+import Loading from 'components/Loading';
 
-const AllianceMemebers = () => { 
-  const [loading, setLoading] = useState(true);
-  const [alliance, setAlliance] = useState({});
-  const [lookupName, setLookupName] = useState();
+const ALLIANCE_QUERY = gql`
+query allianceByName($name: String!) {
+	alliance: allianceByName(name: $name) { 
+		allianceName
+		allianceType, 
+		allianceSize,
+		allianceMaxSize, 
+		members { 
+			playerName
+			allianceRole
+		}
+	}
+}`;
+
+const AllianceMembers = () => { 
   const {name} = useParams();
-  const allianceApiUrl = window._env.MPQDATA_API_URL + "api/rest/v1/alliance/" + name;
+  const {loading, error, data} = useQuery(ALLIANCE_QUERY, { variables: {name} });
   const dispatch = useDispatch(); 
 
-  const lookupAlliance = () => { 
-    let url = new URL(allianceApiUrl); 
-    setLookupName(name);
-    fetch(url)
-      .then(res => res.json())
-      .then(res => { 
-        setAlliance(res);
-        setLoading(false);
-      })
-    ;
-  }
+  const members = data?.alliance?.members || []; 
+  const errMsg = data?.errors?.[0]?.message || error?.message || undefined; 
 
   useEffect( () => {
     dispatch(replaceBreadcrumbs([HOME, ALLIANCE_SEARCH, allianceBreadcrumb(name)]));
     dispatch(replaceAllianceName(name));
   }, [dispatch, name]);
 
-  if (lookupName === undefined || lookupName === null) { 
-    lookupAlliance();
-  }
-
-  if (loading) { 
-      return ( 
-        <section className="content loading"> 
-          <ScaleLoader color={variables.spinnerColor} loading={loading} />
-        </section>
-      );
-  }
-
-  if (Object.keys(alliance).length === 0) { 
-    return (
-      <section className="content"> <p> No results found.</p></section>
-    );
-  }
-
   return (
     <main>
       <h1>Alliance: {name}</h1>
+
+      { loading && <Loading/> }
+
       <section className="content">
         <table className="table table-striped">
           <thead>
@@ -63,10 +50,10 @@ const AllianceMemebers = () => {
           </thead>
           <tbody>
             {
-              alliance.members.map((player, index) => 
+              members.map((player, index) => 
                 <tr key={player.playerName}>
                   <td>
-                    <a href={"/rosters/" + encodeURIComponent(player.playerName)}>{player.playerName}</a>
+                    <Link to={"/rosters/" + encodeURIComponent(player.playerName)}>{player.playerName}</Link>
                   </td>
                   <td>{player.allianceRole}</td>
                   <td className="number" > </td>
@@ -75,8 +62,10 @@ const AllianceMemebers = () => {
             }
           </tbody>
         </table>
+
+
       </section>
     </main>
   );  
 }
-export default AllianceMemebers;
+export default AllianceMembers;
